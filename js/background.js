@@ -1,38 +1,26 @@
-function searchRedditForUrl(url) {
-    const searchQuery = 'url:' + url;
-    const redditSearchUrl = 'https://www.reddit.com/search?q=' + encodeURIComponent(searchQuery);
-    console.log("Opening Reddit search URL: " + redditSearchUrl);
-    chrome.tabs.create({ url: redditSearchUrl });
+function search(){
+    return function(info, tab){
+      let text = info.selectionText;
+      let redditLink = "https://www.reddit.com/" + format(text) + "/top/?t=all"
+      chrome.tabs.create ({index: tab.index + 1, url: redditLink, selected: true});
+    }
 }
 
-function handleContextMenuClick(info, tab) {
-    const linkUrl = info["linkUrl"];
-    console.log("User used context menu on link with URL: " + linkUrl);
-    searchRedditForUrl(linkUrl);
+function format(subName){
+    // If selected text begins with "r/"
+    if (subName[0] === "r" && subName[1] === "/"){
+        return subName
+    } 
+    else {
+        return "r/" + subName
+    }
 }
 
-chrome.contextMenus.create({
-    "title": "Title",
-    "contexts": ["link"],
-    "onclick": handleContextMenuClick
+chrome.contextMenus.create ({
+    "title": "View Top Posts From This Subreddit",
+    "type": "normal",
+    "contexts": ["selection"],
+    "onclick": search()
 });
 
-/*var contextMenuItem = {
-    "id": "contextMenu",
-    "title": "hi",
-    "contexts": ["selection"]
-}
 
-chrome.contextMenus.create(contextMenuItem)
-chrome.contextMenus.onClicked.addListener(function(clicked){
-    var text = clicked.selectionText
-    console.log(text)
-})
-
-
-chrome.contextMenus.onClicked.addListener(function(clickData){
-    var text = clickdata.selectionText
-    if (clickData.menuItemId == "contextMenu"){
-        chrome.tabs.create()
-    }
-})*/
