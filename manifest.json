@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
-    "name": "Top Top Top",
+    "name": "Top Posts Viewer",
     "version": "1.0",
-    "description": "Launch a new tab with all top posts from any subreddit you right-click.",
+    "description": "Launch a new tab with top posts from any subreddit.",
     "permissions": [
         "contextMenus",
         "tabs"
