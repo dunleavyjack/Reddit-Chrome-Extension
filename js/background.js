@@ -10,7 +10,7 @@ function openTab(){
       let redditLink = "https://www.reddit.com/" + format(text) + "/top/?t=all"
       chrome.tabs.create ({index: tab.index + 1, url: redditLink, selected: true});
     }
-}
+};
 
 function format(subName){
     // If selected text begins with "r/"
@@ -20,5 +20,5 @@ function format(subName){
     else {
         return "r/" + subName
     }
-}
+};
 
