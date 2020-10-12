@@ -1,4 +1,10 @@
-function search(){
+chrome.contextMenus.create ({
+    "title": "View Top Posts From This Subreddit",
+    "contexts": ["selection"],
+    "onclick": openTab()
+});
+
+function openTab(){
     return function(info, tab){
       let text = info.selectionText;
       let redditLink = "https://www.reddit.com/" + format(text) + "/top/?t=all"
@@ -15,12 +21,4 @@ function format(subName){
         return "r/" + subName
     }
 }
-
-chrome.contextMenus.create ({
-    "title": "View Top Posts From This Subreddit",
-    "type": "normal",
-    "contexts": ["selection"],
-    "onclick": search()
-});
-
 
