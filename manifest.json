@@ -7,9 +7,6 @@
         "contextMenus",
         "tabs"
     ],
-    "web_accessible_resources" : [
-        "images/icon.png"
-    ],
     "background": {
         "scripts": ["js/background.js"]
     },
